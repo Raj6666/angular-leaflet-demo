@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Zoom Levels Tutorial - Leaflet</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico">
+		<link rel="stylesheet" href="../docs/lib/leaflet.css">
+		<script src="../docs/lib/leaflet.js"></script>
+		<style>
+			#map {
+				width: 600px;
+				height: 400px
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="map"></div>
+		<script>
+			var map = L.map("map", {
+					minZoom: 0,
+					maxZoom: 18,
+					zoomSnap: 0,
+					zoomDelta: .25
+				}),
+				cartodbAttribution = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+				positron = L.tileLayer("http://mt1.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=Galile").addTo(map),
+				ZoomViewer = L.Control.extend({
+					onAdd: function() {
+						var o = L.DomUtil.create("div"),
+							t = L.DomUtil.create("div");
+						return o.style.width = "200px", o.style.background = "rgba(255,255,255,0.5)", o.style.textAlign = "left", map.on("zoomstart zoom zoomend", function(o) {
+							t.innerHTML = "Zoom level: " + map.getZoom()
+						}), o.appendChild(t), o
+					}
+				});
+			(new ZoomViewer).addTo(map), map.setView([0, 0], 0)
+		</script>
+	</body>
+
+</html>

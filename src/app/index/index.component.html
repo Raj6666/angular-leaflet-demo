@@ -1,0 +1,38 @@
+<!-- @Name: index.component
+     @Description: 首页html
+     @Creation Time: 2018/10/15 11:05.
+     @Author: husiyuan
+     @Since: angularPractiseDemo 0.1.0 -->
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzCollapsedWidth]="0" [nzBreakpoint]="'lg'">
+    <div class="logo">
+    </div>
+    <ul nz-menu [nzTheme]="'dark'" [nzMode]="isCollapsed?'vertical':'inline'">
+      <li nz-menu-item><span><em class="anticon anticon-user"></em><span class="nav-text">{{username}}</span></span></li>
+      <li nz-menu-item (click)="logout()"><span><em class="anticon anticon-logout"></em><span class="nav-text">登出</span></span></li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header style="background: #fff; padding:0;">
+      <ul nz-menu class="headerNav" [nzTheme]="'dark'" [nzMode]="'horizontal'">
+        <li nz-menu-item [nzSelected]="currentModule === 'members'" acl [acl]="{ ability: [1, 2], mode: 'allOf' }" (click)="switchModule('members')"><span><em class="anticon anticon-user"></em><span class="nav-text">Members</span></span></li>
+        <li nz-menu-item [nzSelected]="currentModule === 'man'" acl [acl-ability]="1" (click)="switchModule('man')"><span><em class="anticon anticon-man"></em><span class="nav-text">Man</span></span></li>
+        <li nz-menu-item [nzSelected]="currentModule === 'woman'" acl [acl-ability]="2" (click)="switchModule('woman')"><span><em class="anticon anticon-woman"></em><span class="nav-text">Woman</span></span></li>
+      </ul>
+    </nz-header>
+    <nz-content class="content">
+      <div acl [acl]="{ ability: [1, 2], mode: 'oneOf' }" class="table-panel">
+        DataTable from———{{currentModule | capital:false}}
+        <app-member-detail-table [module]="currentModule"></app-member-detail-table>
+      </div>
+
+      <!-- 地图 -->
+      <div class="map_div" #map></div>
+      <!-- 地图窗格 -->
+      <div class="f_type" #f_type></div>
+
+      <span *ngIf="username === 'visitor'">不好意思 访客无权限查看任意模块数据！</span>
+    </nz-content>
+    <nz-footer style="text-align: center;">2018©广州丰石科技有限公司</nz-footer>
+  </nz-layout>
+</nz-layout>

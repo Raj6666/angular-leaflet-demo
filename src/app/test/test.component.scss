@@ -1,0 +1,9 @@
+.warning {
+  border: 1px solid red;
+  border-radius: 4px;
+}
+
+.warning:hover {
+  border: 2px solid red;
+  border-radius: 6px;
+}

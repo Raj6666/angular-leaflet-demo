@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Video Overlay Tutorial - Leaflet</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico">
+		<link href="../../docs/lib/leaflet.css" rel="stylesheet">
+		<script src="../../docs/lib/leaflet.js"></script>
+		<style>
+			#map {
+				width: 600px;
+				height: 400px
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="map"></div>
+		<script>
+			var map = L.map("map");
+			L.tileLayer("http://mt1.google.cn/vt/lyrs=s&hl=zh-CN&gl=CN&x={x}&y={y}&z={z}&s=Gali").addTo(map);
+			var videoUrls = ["data/patricia_nasa.webm", "data/patricia_nasa.mp4"],
+				bounds = L.latLngBounds([
+					[32, -130],
+					[13, -100]
+				]);
+			map.fitBounds(bounds);
+			var overlay = L.videoOverlay(videoUrls, bounds, {
+				opacity: .8,
+				interactive: !0
+			});
+			map.addLayer(overlay)
+		</script>
+	</body>
+
+</html>

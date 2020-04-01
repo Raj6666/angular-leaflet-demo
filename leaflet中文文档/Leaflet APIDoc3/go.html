@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1,maximum-scale=1">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="x5-fullscreen" content="true">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>Leaflet API文档</title>
+		<script src="docs/js/jquery-2.1.4.min.js"></script>
+		<link rel="stylesheet" href="cdn/bootstrap/3.3.7/css/bootstrap.css">
+		<link rel="stylesheet" href="cdn/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="cdn/admin-lte/2.4.2/css/AdminLTE.min.css">
+		<link rel="stylesheet" href="cdn/admin-lte/2.4.2/css/skins/skin-blue.min.css">
+		<script src="cdn/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="lib/hao/loading/loading.css">
+		<script src="cdn/admin-lte/2.4.2/js/adminlte.min.js"></script>
+		<script src="lib/hao/haoutil.min.js"></script>
+		<script src="lib/hao/loading/loading.js"></script>
+		<link rel="stylesheet" href="css/common.css">
+		<link rel="stylesheet" href="css/header.css">
+		<link rel="stylesheet" href="css/docs.css">
+		<script src="js/docs.js"></script>
+	</head>
+	<body class="hold-transition skin-blue">
+		<header class="header-wrapper main-header"></header>
+		<script>
+			var identification = {
+				name: ""
+			};
+			$(".main-header").load("header.html");
+		</script>
+		<iframe id="myiframe" name="myiframe" src="" scrolling="auto" frameborder="0" onload="window.changeFrameHeight&&changeFrameHeight()" style="width:100%"></iframe>
+		<script>
+			function changeFrameHeight() {
+				var e = document.getElementById("myiframe");
+				e.height = document.documentElement.clientHeight - 60
+			}
+			window.onresize = function() {
+				changeFrameHeight()
+			}, changeFrameHeight();
+			var url = haoutil.system.getRequestByName("id");
+			switch(url) {
+				default:
+				case "11":
+					url = "go-leaflet.html";
+					break;
+				case "12":
+					url = "examples.html";
+					break;
+				case "13":
+					url = "reference_cn.html";
+					break;
+				case "14":
+					url = "plugins.html";
+					break;
+			}
+			document.getElementById("myiframe").src = "reference_cn.html";
+		</script>
+	</body>
+
+</html>

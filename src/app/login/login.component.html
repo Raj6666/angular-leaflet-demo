@@ -1,0 +1,40 @@
+<!-- @Name: login.component
+     @Description: 登录页html
+     @Creation Time: 2018/10/15 11:25.
+     @Author: husiyuan
+     @Since: angularPractiseDemo 0.1.0 -->
+<nz-layout>
+  <nz-content style="text-align:center">
+    <p class="title">XX管理系统</p>
+    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-user">
+            <input type="text" nz-input formControlName="userName" placeholder="用户名">
+          </nz-input-group>
+          <div class="error" nz-form-explain *ngIf=" validateForm.get('userName').touched && validateForm.get('userName').invalid">请输入用户名!</div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <nz-input-group nzPrefixIcon="anticon anticon-lock">
+            <input type="password" nz-input formControlName="password" placeholder="密码">
+          </nz-input-group>
+          <div class="error" nz-form-explain *ngIf="validateForm.get('password').touched && validateForm.get('password').invalid">请输入密码!</div>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <!--<label nz-checkbox formControlName="remember">-->
+            <!--<span>Remember me</span>-->
+          <!--</label>-->
+          <!--<a class="login-form-forgot" class="login-form-forgot">Forgot password</a>-->
+          <button nz-button class="login-form-button" [nzType]="'primary'" [nzSize]="'large'" [disabled]="!validateForm.valid" >登录</button>
+          <!--Or-->
+          <!--<a href="">register now!</a>-->
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </nz-content>
+</nz-layout>
+

@@ -1,0 +1,2 @@
+/* 2018-1-2 08:19:04 | 版权所有 合肥火星科技有限公司 http://www.marsgis.cn  【联系我们QQ：516584683】 */
+haoutil.loading=function(){function t(t){null==t&&(t={}),"string"==typeof t&&(t={text:t}),null==t.type&&(t.type="loader-default");var e="";null!=t.text&&(e=' data-text="'+t.text+'" ');var n='<div id="'+a+'" class="loader '+t.type+' is-active"  '+e+" ></div>";t.parent?$(t.parent).append(n):$("body").append(n)}function e(){$("#"+a).remove()}var a="muyao-loading";return{show:t,hide:e,close:e}}();

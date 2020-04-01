@@ -1,0 +1,53 @@
+/* @Name: login.component
+ * @Description: 登录页样式文件
+ * @Creation Time: 2018/10/15 11:36.
+ * @Author: husiyuan
+ * @Since: angularPractiseDemo 0.1.0
+ */
+:host  .ant-layout {
+  height: 100%;
+}
+:host .ant-layout-content {
+  background: url("../../assets/images/login/background.png") 100% no-repeat;
+}
+
+:host  .title {
+  max-width: 400px;
+  width: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -170px 0 0 -200px;
+  color: #ddd;
+  text-align: center;
+  font-size: 2em;
+}
+
+:host .login-form {
+  position: absolute;
+  max-width: 400px;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  padding: 30px 20px 0 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+:host .error {
+  color: #ea1d1b;
+  height: 20px;
+  float: left;
+  font-weight: bolder;
+}
+
+:host .login-form-button {
+  width: 100%;
+}
+
+:host .ant-btn-primary[disabled] {
+  color: #fff;
+  background-color: #1890ff;
+  border-color: #1890ff;
+}
+

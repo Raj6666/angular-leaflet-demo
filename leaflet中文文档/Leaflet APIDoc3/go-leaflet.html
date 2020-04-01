@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,minimum-scale=1,maximum-scale=1">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="x5-fullscreen" content="true">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<title>MarsGIS for Leaflet</title>
+		<link rel="stylesheet" href="docs/css/main.css">
+		<link rel="stylesheet" href="docs/css/normalize.css">
+		<link href="docs/highlight/styles/github-gist.css" rel="stylesheet">
+		<script src="docs/highlight/highlight.pack.js"></script>
+		<script src="docs/js/jquery-2.1.4.min.js"></script>
+		<script src="docs/js/globe.js"></script>
+		<link href="docs/lib/leaflet.css" rel="stylesheet">
+		<script src="docs/lib/leaflet.js"></script>
+		<script>
+			$(document).ready(function() {
+				replaceCdnIP("useAPIcode"), replaceCdnIP("useNewMapcode"), $("pre code").each(function(e, c) {
+					hljs.highlightBlock(c);
+				});
+				var e = "examples/config/config.json";
+				L.mars.createMap({
+					id: "mapid1",
+					url: e
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="container">
+			<h2 id="leaflet">Leaflet快速开始</h2>
+			<p>
+				<a href="http://leafletjs.com/" target="_blank">Leaflet</a>是一个开源的JavaScript库，对移动端友好且有很好的交互性。 大小仅仅只有 33 KB， 同时具有大多数地图所需要的特点。 Leaflet设计的非常简单易懂, 同时具有很好的性能和易用性。 它在桌面端和移动端都工作的相当高效，并有大量的插件用于扩张Leaflet的功能。</p>
+			<h3 id="section">准备你的页面</h3>
+			<p>在开始写代码之前，你需要完成以下几个步骤来准备你的页面：</p>
+			<ul>
+				<li>
+					<p>在页面的head标签中添加以下代码来引入CSS和JavaScript文件：</p>
+					<div class="highlighter-rouge"><pre class="highlight"><code id="useAPIcode" class="html">&lt;link href="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.css" rel="stylesheet" type="text/css" /&gt;
+&lt;script src="https://cdn.bootcss.com/leaflet/1.2.0/leaflet.js" type="text/javascript" &gt;&lt;/script&gt;</code></pre></div>
+				</li>
+				<li>
+					<p>将id为map的div标签放到地图显示的地方，如body中：</p>
+					<div class="highlighter-rouge"><pre class="highlight"><code class="html">&lt;div id="map"&gt;&lt;/div&gt;</code></pre></div>
+				</li>
+				<li>
+					<p>【可选】确保地图容器有定义好的高度，例如在css文件中添加如下代码：</p><pre><code class="css">html, body,#map {height: 100%;width: 100%;margin: 0;padding: 0;} </code></pre></li>
+			</ul>
+			<h3 id="section-1">设置地图</h3>
+			<div id="mapid1" class="mapclass" style="height:250px"></div>
+			<p>让我们创建一个使用本地GWC发布的地图。首先，我们初始化地图，并且设置地图在视窗的中心点和缩放级别，并添加底图图层：</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code id="useNewMapcode" class="js">var map = L.map('map', {
+    minZoom: 3,
+    maxZoom: 17,
+    center: [32.550339, 106.114129],
+    zoom: 4,
+    attributionControl: false
+});
+var url = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
+L.tileLayer(url).addTo(map);
+                </code></pre></div>
+			<p>现在你已经学会使用Leaflet创建一个地图应用。如果想要继续开发更多功能，请查看详细的API文档和示例。</p>
+		</div>
+	</body>
+
+</html>

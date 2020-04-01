@@ -1,0 +1,53 @@
+/* @Name: index.component
+ * @Description: 首页样式文件
+ * @Creation Time: 2018/10/15 11:26.
+ * @Author: husiyuan
+ * @Since: angularPractiseDemo 0.1.0
+ */
+
+:host .ant-layout {
+  height: 100%;
+}
+
+:host .logo {
+  height: 72px;
+  background: url("../../assets/images/index/richstone.jpg") 100% no-repeat;
+  background-size: 100% 125%;
+  margin: 16px;
+
+}
+
+:host .ant-layout-header{
+  height: 74px;
+  line-height: 74px;
+}
+
+.headerNav{
+  line-height: 74px;
+}
+
+.content{
+  margin:24px 16px 0;
+  position: relative;
+
+  span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .table-panel{
+    padding:24px;
+    background: #fff;
+    min-height: 520px;
+  }
+}
+
+.map_div{
+  width: 100%;
+  height: 595px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  z-index: 0;
+}

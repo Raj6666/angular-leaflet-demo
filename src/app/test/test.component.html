@@ -1,0 +1,38 @@
+<div #questionTypeSelector>
+  <nz-select   style="width: 120px;" [(ngModel)]="selectedValue1" nzAllowClear >
+    <nz-option nzValue="jack" nzLabel="Jack"></nz-option>
+    <nz-option nzValue="lucy" nzLabel="Lucy"></nz-option>
+  </nz-select>
+</div>
+<nz-select #domainSelector style="width: 120px;" [(ngModel)]="selectedValue2" nzAllowClear>
+  <nz-option nzValue="Raj" nzLabel="raj"></nz-option>
+  <nz-option nzValue="Irving" nzLabel="Irving"></nz-option>
+</nz-select>
+<nz-range-picker
+  #datePicker
+  [nzRanges]="ranges1"
+  ngModel
+></nz-range-picker>
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;width: 100%">
+<nz-tree
+  #waitSelectTreeCom
+  [nzData]="waitSelectTreeNodes"
+  nzCheckable="true"
+  nzMultiple="true"
+  [nzExpandAll] = 'true'
+  (nzCheckBoxChange)="nzCheck($event)">
+</nz-tree>
+  <button (click)="toRight()"> >></button>
+  <button (click)="toLeft()" ><<</button>
+<nz-tree
+  #selectedTreeCom
+  [nzData]="selectedTreeNodes"
+  nzCheckable="true"
+  nzMultiple="true"
+  [nzExpandAll] = 'true'
+  (nzCheckBoxChange)="nzCheck($event)">
+</nz-tree>
+</div>
+<button (click)="check()" >check</button>
+

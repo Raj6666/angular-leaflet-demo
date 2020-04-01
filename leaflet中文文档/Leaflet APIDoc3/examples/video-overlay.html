@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>Leaflet on Mobile - Leaflet - a JavaScript library for interactive maps</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="../docs/images/favicon.ico">
+		<link href="http://leafletjs.com/atom.xml" type="application/atom+xml" rel="alternate" title="Leaflet Dev Blog Atom Feed">
+		<link rel="stylesheet" href="../docs/css/normalize.css">
+		<link rel="stylesheet" href="../docs/css/main.css">
+		<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300" rel="stylesheet">
+		<script src="../docs/highlight/highlight.pack.js"></script>
+		<link rel="stylesheet" href="../docs/highlight/styles/github-gist.css">
+		<link href="../docs/lib/leaflet.css" rel="stylesheet">
+		<script src="../docs/lib/leaflet.js"></script>
+		<script>
+			MB_URL = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.jpg", OSM_URL = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.jpg", ACCESS_TOKEN = "", MB_ATTR = "", OSM_ATTRIB = ""
+		</script>
+	</head>
+
+	<body>
+		<div class="container">
+			<p class="tutorials-back">
+				<a href="../examples.html">&larr; 所有教程</a>
+			</p>
+			<h2 id="video-on-webpages">Video on webpages</h2>
+			<p>Video used to be a hard task when building a webpage, until the
+				<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video"><code class="highlighter-rouge">&lt;video&gt;</code> HTML element</a> was made available.</p>
+			<p>Nowadays, we can use the following HTML code:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>&lt;video width="500" controls&gt;
+	&lt;source src="https://www.mapbox.com/bites/00188/patricia_nasa.webm" type="video/webm"&gt;
+	&lt;source src="https://www.mapbox.com/bites/00188/patricia_nasa.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+</code></pre></div>
+			<p>To display this video:</p>
+			<video width="500" controls>
+				<source src="video-overlay/data/patricia_nasa.webm" type="video/webm">
+				<source src="video-overlay/data/patricia_nasa.mp4" type="video/mp4">
+			</video>
+			<p>If a video can be shown in a webpage in this way, then Leaflet can display it inside a map. It is important that the videos are prepared in such a way that they will fit the map: The video should have a &#8220;north-up&#8221; orientation, and its proportions should fit the map. If not, it will look out of place.</p>
+			<h3 id="bounds-of-an-image-overlay">Bounds of an image overlay</h3>
+			<p>First of all, create a Leaflet map and add a background <code class="highlighter-rouge">L.TileLayer</code> in the usual way:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>var map = L.map('map').setView([37.8, -96], 4);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg?access_token=' + mapboxAccessToken, {
+	id: 'mapbox.satellite',
+	attribution: ...
+}).addTo(map);
+</code></pre></div>
+			<p>Then, we&#8217;ll define the geographical bounds that the video will cover. This is an instance of
+				<a href="/reference.html#latlngbounds"><code class="highlighter-rouge">L.LatLngBounds</code></a>, which is a rectangular shape:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>var bounds = L.latLngBounds([[ 32, -130], [ 13, -100]]);
+</code></pre></div>
+			<p>If you want to see the area covered by a <code class="highlighter-rouge">LatLngBounds</code>, use a
+				<a href="(../reference.html#latlngbounds)"><code class="highlighter-rouge">L.Rectangle</code></a>:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>L.rectangle(bounds).addTo(map);
+map.fitBounds(bounds);
+</code></pre></div>
+			<table>
+				<tr>
+					<td style="text-align:center;border:none"><iframe src="video-overlay/example-bounds.html" width="616" height="416"></iframe></td>
+				</tr>
+				<tr>
+					<td style="text-align:center;border:none"><small><a href="video-overlay/example-bounds.html" target="_blank" target="_blank">单独打开页面查看这个例子</a></small></td>
+				</tr>
+			</table>
+			<h3 id="adding-the-video-overlay">Adding the video overlay</h3>
+			<p>Adding a video overlay works very similar to adding a image overlay. For just one image,
+				<a href="/reference.html#imageoverlay"><code class="highlighter-rouge">L.ImageOverlay</code>s</a> is used like this:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>var overlay = L.imageOverlay( imageUrl, bounds, options );
+</code></pre></div>
+			<p>For a video overlay, just:</p>
+			<ul>
+				<li>Use <code class="highlighter-rouge">L.videoOverlay</code> instead of <code class="highlighter-rouge">L.imageOverlay</code></li>
+				<li>Instead of the image URL, specify one video URL <em>or</em> an array of video URLs</li>
+			</ul>
+			<div class="highlighter-rouge"><pre class="highlight"><code>	var videoUrls = [
+		'https://www.mapbox.com/bites/00188/patricia_nasa.webm',
+		'https://www.mapbox.com/bites/00188/patricia_nasa.mp4'
+	];
+	var bounds = L.latLngBounds([[ 32, -130], [ 13, -100]]);
+	var videoOverlay = L.videoOverlay( videoUrls, bounds, {
+		opacity: 0.8
+	}).addTo(map);
+</code></pre></div>
+			<p>And just like that, you&#8217;ll get the video on your map:</p>
+			<table>
+				<tr>
+					<td style="text-align:center;border:none"><iframe src="video-overlay/example-nocontrols.html" width="616" height="416"></iframe></td>
+				</tr>
+				<tr>
+					<td style="text-align:center;border:none"><small><a href="video-overlay/example-nocontrols.html" target="_blank">单独打开页面查看这个例子</a></small></td>
+				</tr>
+			</table>
+			<p>Video overlays behave like any other Leaflet layer - you can add and remove them, let the user select from several videos using a
+				<a href="../layers-control/">layers control</a>, etc.</p>
+			<h3 id="a-bit-of-control-over-the-video">A bit of control over the video</h3>
+			<p>If you read the API documentation, you&#8217;ll notice that the <code class="highlighter-rouge">L.VideoOverlay</code> class does not have a <code class="highlighter-rouge">play()</code> or <code class="highlighter-rouge">pause()</code> method.</p>
+			<p>For this, the <code class="highlighter-rouge">getElement()</code> method of the video overlay is useful. It returns the
+				<a href="https://developer.mozilla.org/docs/Web/API/HTMLImageElement"><code class="highlighter-rouge">HTMLVideoElement</code></a> (which inherits from
+				<a href="https://developer.mozilla.org/docs/Web/API/HTMLMediaElement"><code class="highlighter-rouge">HTMLMediaElement</code></a>) for the overlay - and that has methods like <code class="highlighter-rouge">play()</code> and <code class="highlighter-rouge">pause()</code>, e.g.</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>	videoOverlay.getElement().pause();
+</code></pre></div>
+			<p>This allows us to build custom interfaces. For example, we can build a small subclass of <code class="highlighter-rouge">L.Control</code> to play/pause this video overlay once it&#8217;s loaded:</p>
+			<div class="highlighter-rouge"><pre class="highlight"><code>	videoOverlay.on('load', function () {
+		var MyPauseControl = L.Control.extend({
+			onAdd: function() {
+				var button = L.DomUtil.create('button');
+				button.innerHTML = '⏸';
+				L.DomEvent.on(button, 'click', function () {
+					videoOverlay.getElement().pause();
+				});
+				return button;
+			}
+		});
+		var MyPlayControl = L.Control.extend({
+			onAdd: function() {
+				var button = L.DomUtil.create('button');
+				button.innerHTML = '⏵';
+				L.DomEvent.on(button, 'click', function () {
+					videoOverlay.getElement().play();
+				});
+				return button;
+			}
+		});
+		var pauseControl = (new MyPauseControl()).addTo(map);
+		var playControl = (new MyPlayControl()).addTo(map);
+	});
+</code></pre></div>
+			<table>
+				<tr>
+					<td style="text-align:center;border:none"><iframe src="video-overlay/example.html" width="616" height="416"></iframe></td>
+				</tr>
+				<tr>
+					<td style="text-align:center;border:none"><small><a href="video-overlay/example.html" target="_blank" target="_blank">单独打开页面查看这个例子</a></small></td>
+				</tr>
+			</table>
+			<div class="footer">
+				<p>&copy; 版权所有
+					<a href="http://leafletjs.com" target="_blank">Leaflet </a>&nbsp; &nbsp; 翻译
+					<a href="http://www.marsgis.cn" target="_blank">合肥火星科技</a>
+				</p>
+			</div>
+		</div>
+		<script>
+			hljs.configure({
+					tabReplace: "    "
+				}), hljs.initHighlighting(),
+				function() {
+					if(document.body.className.indexOf("api-page") !== -1)
+						for(var i = document.getElementsByTagName("h2"), n = 0, e = i.length; n < e; n++) i[n].id && (i[n].onclick = function(i) {
+							i.offsetX < 0 && (window.location.hash = "#" + this.id)
+						})
+				}()
+		</script>
+		<script>
+			var _gaq = _gaq || [];
+			_gaq.push(["_setAccount", "UA-4147697-4"]), _gaq.push(["_trackPageview"]),
+				function() {
+					var t = document.createElement("script");
+					t.type = "text/javascript", t.async = !0, t.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";
+					var e = document.getElementsByTagName("script")[0];
+					e.parentNode.insertBefore(t, e)
+				}()
+		</script>
+		<script src="../docs/js/docs.js"></script>
+	</body>
+
+</html>

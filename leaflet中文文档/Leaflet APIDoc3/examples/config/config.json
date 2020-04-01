@@ -1,0 +1,32 @@
+{
+    "map": {
+        "zoom": 13,
+        "center": { "x": 117.240601, "y": 31.827107 },
+        "minZoom": 3,
+        "maxZoom": 18,
+        "centerAutoLevel": 15,
+        "controls": [
+            { "type": "scale" },
+            { "type": "location", "showlevel": false },
+            { "type": "tool", "item": [ "home", "location", "fullscreen" ], "position": "bottomright" },
+            { "type": "zoom", "position": "bottomright" },
+            { "type": "layers", "position": "topleft", "visible": true }
+        ],
+        "crs": "gcj",
+        "basemaps": [
+            { "name": "高德地图", "type": "www_gaode", "layer": "vec", "visible": true },
+            { "name": "高德卫星", "type": "www_gaode", "layer": "img" },
+            { "name": "谷歌地图", "type": "www_google", "layer": "vec" },
+            { "name": "谷歌卫星", "type": "www_google", "layer": "img" },
+            {
+                "name": "深色地图",
+                "type": "arcgis_tile",
+                "url": "http://map.geoq.cn/ArcGIS/rest/services/ChinaOnlineStreetPurplishBlue/MapServer"
+            }
+        ],
+        "operationallayers": [
+            { "name": "实时路况", "type": "www_gaode", "layer": "time" },
+            { "name": "经纬网", "type": "custom_jww" }
+        ]
+    }
+}
